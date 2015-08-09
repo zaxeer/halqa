@@ -1,0 +1,12 @@
+CREATE TABLESPACE tbs_perm_02 DATAFILE 'tbs_perm_02.dat'  SIZE 10M REUSE AUTOEXTEND ON NEXT 10M MAXSIZE 200M;
+CREATE TEMPORARY TABLESPACE tbs_temp_01 TEMPFILE 'tbs_temp_01.dbf' SIZE 5M AUTOEXTEND ON;
+
+CREATE USER nied IDENTIFIED BY alipia DEFAULT TABLESPACE tbs_perm_02 TEMPORARY TABLESPACE tbs_temp_01 QUOTA 20M on tbs_perm_02;
+
+GRANT create session TO nied;
+GRANT create table TO nied;
+GRANT create view TO nied;
+GRANT create any trigger TO nied;
+GRANT create any procedure TO nied;
+GRANT create sequence TO nied;
+GRANT create synonym TO nied;
