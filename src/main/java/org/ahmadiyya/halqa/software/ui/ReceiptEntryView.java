@@ -1,46 +1,25 @@
 package org.ahmadiyya.halqa.software.ui;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSession;
-
 import org.ahmadiyya.halqa.software.model.Receipt;
 import org.ahmadiyya.halqa.software.service.ReceiptService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.web.context.support.WebApplicationContextUtils;
-import org.vaadin.viritin.SortableLazyList;
-import org.vaadin.viritin.fields.MTable;
 import org.vaadin.viritin.button.MButton;
+import org.vaadin.viritin.fields.MTable;
 import org.vaadin.viritin.label.RichText;
 import org.vaadin.viritin.layouts.MHorizontalLayout;
 import org.vaadin.viritin.layouts.MVerticalLayout;
 
-import com.vaadin.data.fieldgroup.BeanFieldGroup;
-import com.vaadin.data.fieldgroup.FieldGroup;
-import com.vaadin.data.fieldgroup.FieldGroup.CommitException;
 import com.vaadin.event.MouseEvents.ClickEvent;
-import com.vaadin.navigator.Navigator;
+import com.vaadin.navigator.View;
+import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.FontAwesome;
-import com.vaadin.server.VaadinRequest;
-import com.vaadin.server.WrappedSession;
-import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.Form;
-import com.vaadin.ui.GridLayout;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.TextField;
-import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
-@SpringUI
-public class MyVaadinUI extends UI {
-
+public class ReceiptEntryView extends VerticalLayout implements View {
+	
 	@Autowired
 	ReceiptService repo;
-
 
 	private MTable<Receipt> list = new MTable<>(Receipt.class)
 			.withProperties("id", "memberId", "wassiyatId", "memberName",
@@ -49,43 +28,21 @@ public class MyVaadinUI extends UI {
 					"receiptDate", "aam")
 			.setSortableProperties("id", "memberId").withFullWidth();
 
-	private Button addNew = new MButton(FontAwesome.PLUS, this::add);
-
-	private ApplicationContext applicationContext;
+	private Button addNew = new MButton(FontAwesome.PLUS, this::add);// new
+																		// Button("Add");//
+																		// MButton(FontAwesome.PLUS,
+																		// this.add);
 
 	@Override
-	protected void init(VaadinRequest request) {
-		WrappedSession session = request.getWrappedSession();
-		HttpSession httpSession = ((com.vaadin.server.WrappedHttpSession) session)
-				.getHttpSession();
-		ServletContext servletContext = httpSession.getServletContext();
-		applicationContext = WebApplicationContextUtils
-				.getRequiredWebApplicationContext(servletContext);
-		Navigator navigator = new Navigator(this, this);
-		navigator.addView("login", LoginView.class);
-		navigator.addView("user", UserView.class);
-		navigator.addView("main", ReceiptEntryView.class);
-		navigator.navigateTo("login");
-		setNavigator(navigator);
+	public void enter(ViewChangeEvent event) {
+		addComponent(new MVerticalLayout(
+				new RichText().withMarkDownResource("/welcome.md"),
+				new MHorizontalLayout(addNew), list).expand(list));
+		listEntities();
+		list.addMValueChangeListener(e -> adjustActionButtonState());
+
 	}
 
-	public ApplicationContext getApplicationContext() {
-		return applicationContext;
-	}
-
-	// @Override
-	// protected void init(VaadinRequest vaadinRequest) {
-	//
-	// setContent(
-	// new MVerticalLayout(
-	// new RichText().withMarkDownResource("/welcome.md"),
-	// new MHorizontalLayout(addNew),
-	// list
-	// ).expand(list)
-	// );
-	// listEntities();
-	// list.addMValueChangeListener(e -> adjustActionButtonState());
-	// }
 	protected void adjustActionButtonState() {
 		boolean hasSelection = list.getValue() != null;
 		// edit.setEnabled(hasSelection);
@@ -152,6 +109,8 @@ public class MyVaadinUI extends UI {
 	}
 
 	protected void closeWindow() {
-		getWindows().stream().forEach(w -> removeWindow(w));
+		
+		getUI().getWindows().stream().forEach(w -> getUI().removeWindow(w));
 	}
+
 }

@@ -64,6 +64,7 @@
 		<dependency>
 			<groupId>org.vaadin</groupId>
 			<artifactId>viritin</artifactId>
+			<version>1.35</version>
 		</dependency>
 
 		<!-- Hibernate -->
@@ -97,6 +98,17 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.4</version>
+		</dependency>
+
 
 	</dependencies>
 

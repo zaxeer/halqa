@@ -19,7 +19,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public User findByUserName(String username) {
 		List<User> users = new ArrayList<User>();
-		users = entityManager.createQuery("from User where username=?")
+		users = entityManager.createQuery("from User where username=?0")
 				.setParameter(0, username).getResultList();
 		
 		if (users.size() > 0) {
