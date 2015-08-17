@@ -1,7 +1,8 @@
-package org.ahmadiyya.halqa.software.ui;
+package org.ahmadiyya.halqa.software.ui.view;
 
 import java.util.Collection;
 
+import org.ahmadiyya.halqa.software.ui.listener.LogoutListener;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
@@ -16,6 +17,8 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
 public class UserView extends VerticalLayout implements View {
+
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	public void enter(ViewChangeEvent event) {

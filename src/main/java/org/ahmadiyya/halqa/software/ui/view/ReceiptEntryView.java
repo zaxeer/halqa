@@ -1,8 +1,13 @@
-package org.ahmadiyya.halqa.software.ui;
+package org.ahmadiyya.halqa.software.ui.view;
+
+import java.util.List;
+import java.util.Optional;
 
 import org.ahmadiyya.halqa.software.model.Receipt;
 import org.ahmadiyya.halqa.software.service.ReceiptService;
+import org.ahmadiyya.halqa.software.ui.form.ReceiptEntryForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.vaadin.viritin.button.MButton;
 import org.vaadin.viritin.fields.MTable;
 import org.vaadin.viritin.label.RichText;
@@ -13,11 +18,15 @@ import com.vaadin.event.MouseEvents.ClickEvent;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.FontAwesome;
+import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.VerticalLayout;
 
+
 public class ReceiptEntryView extends VerticalLayout implements View {
 	
+	private static final long serialVersionUID = 1L;
+
 	@Autowired
 	ReceiptService repo;
 
@@ -28,10 +37,7 @@ public class ReceiptEntryView extends VerticalLayout implements View {
 					"receiptDate", "aam")
 			.setSortableProperties("id", "memberId").withFullWidth();
 
-	private Button addNew = new MButton(FontAwesome.PLUS, this::add);// new
-																		// Button("Add");//
-																		// MButton(FontAwesome.PLUS,
-																		// this.add);
+	private Button addNew = new MButton(FontAwesome.PLUS, this::add);
 
 	@Override
 	public void enter(ViewChangeEvent event) {
@@ -52,32 +58,8 @@ public class ReceiptEntryView extends VerticalLayout implements View {
 	static final int PAGESIZE = 45;
 
 	private void listEntities() {
-		list.setBeans(repo.listReceipts());
-		// A dead simple in memory listing would be:
-		// list.setBeans(repo.findAll());
-
-		// Lazy binding with SortableLazyList: memory and query efficient
-		// connection from Vaadin Table to Spring Repository
-		// Note that fetching strategies can be given to MTable constructor as
-		// well.
-		// Use this approach if you expect you'll have lots of data in your
-		// table.
-
-		// list.setBeans(new SortableLazyList<>(
-		// // entity fetching strategy
-		// (firstRow, asc, sortProperty) -> repo.findAllBy(
-		// new PageRequest(
-		// firstRow / PAGESIZE,
-		// PAGESIZE,
-		// asc ? Sort.Direction.ASC : Sort.Direction.DESC,
-		// // fall back to id as "natural order"
-		// sortProperty == null ? "id" : sortProperty
-		// )
-		// ),
-		// // count fetching strategy
-		// () -> (int) repo.count(),
-		// PAGESIZE
-		// ));
+		Optional<List<Receipt>> receipts = Optional.ofNullable(repo.listReceipts());
+		receipts.ifPresent(list::setBeans); //list.setBeans(repo.listReceipts()); 
 		adjustActionButtonState();
 
 	}

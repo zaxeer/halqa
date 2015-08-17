@@ -1,19 +1,23 @@
-package org.ahmadiyya.halqa.software.ui;
+package org.ahmadiyya.halqa.software.ui.listener;
 
 import com.vaadin.navigator.Navigator;
 import com.vaadin.ui.*;
 
 import org.ahmadiyya.halqa.software.service.AuthManager;
+import org.ahmadiyya.halqa.software.ui.MyVaadinUI;
+import org.ahmadiyya.halqa.software.ui.form.LoginForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-import org.vaadin.viritin.fields.MTextField;
 
 @Component
 public class LoginFormListener implements Button.ClickListener {
+
+	private static final long serialVersionUID = 1L;
+	
 	@Autowired
 	private AuthManager authManager;
 

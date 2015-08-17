@@ -1,5 +1,7 @@
-package org.ahmadiyya.halqa.software.ui;
+package org.ahmadiyya.halqa.software.ui.form;
 
+import org.ahmadiyya.halqa.software.ui.MyVaadinUI;
+import org.ahmadiyya.halqa.software.ui.listener.LoginFormListener;
 import org.springframework.context.ApplicationContext;
 
 import com.vaadin.ui.Button;
@@ -9,6 +11,8 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
 public class LoginForm extends VerticalLayout {
+
+	private static final long serialVersionUID = 1L;
 	private TextField txtLogin = new TextField("Login: ");
 	private PasswordField txtPassword = new PasswordField("Password: ");
 	private Button btnLogin = new Button("Login");

@@ -16,9 +16,6 @@ public class HalqaSoftwareApplicationTests {
 	@Autowired
 	UserDetailsService service;
 
-	@Test
-	public void contextLoads() {
-		service.loadUserByUsername("Hans");
-	}
+	
 
 }

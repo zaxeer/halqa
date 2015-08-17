@@ -1,4 +1,4 @@
-package org.ahmadiyya.halqa.software.ui;
+package org.ahmadiyya.halqa.software.ui.form;
 
 import org.ahmadiyya.halqa.software.model.Receipt;
 import org.vaadin.viritin.fields.MTextField;
@@ -12,6 +12,7 @@ import com.vaadin.ui.TextField;
 
 public class ReceiptEntryForm extends AbstractForm <Receipt>{
 	
+	private static final long serialVersionUID = 1L;
 	TextField id = new MTextField("Receipt id");
     TextField memberId = new MTextField("Member Id");
     TextField wassiyatId = new MTextField("Wasiyyat Id");
@@ -20,7 +21,7 @@ public class ReceiptEntryForm extends AbstractForm <Receipt>{
     TextField aam = new MTextField("Chanda aam");
     
 
-    ReceiptEntryForm(Receipt receiptEntry) {
+    public ReceiptEntryForm(Receipt receiptEntry) {
         setSizeUndefined();
         setEntity(receiptEntry);
     }

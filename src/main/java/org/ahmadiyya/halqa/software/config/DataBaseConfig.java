@@ -5,7 +5,7 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import org.ahmadiyya.halqa.software.service.AuthManager;
-import org.ahmadiyya.halqa.software.ui.LoginFormListener;
+import org.ahmadiyya.halqa.software.ui.listener.LoginFormListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,16 +22,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 public class DataBaseConfig {
 
-	@Bean
-	public AuthManager authManager() {
-		AuthManager res = new AuthManager();
-		return res;
-	}
 
-	  @Bean
-	  public LoginFormListener loginFormListener() {
-	    return new LoginFormListener();
-	  }
 
 	/**
 	 * DataSource definition for database connection. Settings are read from the
