@@ -17,10 +17,10 @@ public class BeanConfig {
 		return new AuthManager();
 	}
 
-	@Bean
-	public ReceiptService repoService() {
-		return new ReceiptServiceImpl();
-	}
+//	@Bean
+//	public ReceiptServiceImpl receiptService() {
+//		return new ReceiptServiceImpl();
+//	}
 
 	@Bean
 	public LoginFormListener loginFormListener() {

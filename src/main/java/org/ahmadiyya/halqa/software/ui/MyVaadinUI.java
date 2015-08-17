@@ -24,7 +24,7 @@ public class MyVaadinUI extends UI {
 	private ApplicationContext applicationContext;
 	
 	@Autowired
-	private ReceiptService repo;
+	private ReceiptService receiptService;
 
 	@Override
 	protected void init(VaadinRequest request) {
@@ -46,8 +46,8 @@ public class MyVaadinUI extends UI {
 		return applicationContext;
 	}
 
-	public ReceiptService getRepo() {
-		return repo;
+	public ReceiptService getReceiptService() {
+		return receiptService;
 	}
 
 }

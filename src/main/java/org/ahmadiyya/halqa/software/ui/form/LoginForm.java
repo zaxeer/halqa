@@ -4,6 +4,7 @@ import org.ahmadiyya.halqa.software.ui.MyVaadinUI;
 import org.ahmadiyya.halqa.software.ui.listener.LoginFormListener;
 import org.springframework.context.ApplicationContext;
 
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
@@ -21,6 +22,10 @@ public class LoginForm extends VerticalLayout {
 		addComponent(txtLogin);
 		addComponent(txtPassword);
 		addComponent(btnLogin);
+		setComponentAlignment(txtLogin, Alignment.MIDDLE_CENTER);
+		setComponentAlignment(txtPassword, Alignment.MIDDLE_CENTER);
+		setComponentAlignment(btnLogin, Alignment.MIDDLE_CENTER);
+		
 		LoginFormListener loginFormListener = getLoginFormListener();
 		btnLogin.addClickListener(loginFormListener);
 	}

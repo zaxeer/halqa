@@ -9,6 +9,6 @@ public interface ReceiptService {
 
 	public List<Receipt> listReceipts();
 
-	public Receipt getPersonById(long id);
+	public Receipt getReceiptById(long id);
 
 }

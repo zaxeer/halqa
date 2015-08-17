@@ -13,9 +13,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @WebAppConfiguration
 public class HalqaSoftwareApplicationTests {
 	
-	@Autowired
-	UserDetailsService service;
 
-	
 
 }

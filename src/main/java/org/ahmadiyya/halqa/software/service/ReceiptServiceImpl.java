@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
+@Service("receiptService")
 public class ReceiptServiceImpl implements ReceiptService {
 
 	@Autowired
@@ -27,7 +27,7 @@ public class ReceiptServiceImpl implements ReceiptService {
 
 	@Transactional
 	@Override
-	public Receipt getPersonById(long id) {
+	public Receipt getReceiptById(long id) {
 		return this.receiptDao.getPersonById(id);
 	}
 

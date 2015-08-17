@@ -5,9 +5,15 @@ import java.util.Optional;
 
 import org.ahmadiyya.halqa.software.model.Receipt;
 import org.ahmadiyya.halqa.software.service.ReceiptService;
+import org.ahmadiyya.halqa.software.ui.MyVaadinUI;
 import org.ahmadiyya.halqa.software.ui.form.ReceiptEntryForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.vaadin.viritin.button.MButton;
 import org.vaadin.viritin.fields.MTable;
 import org.vaadin.viritin.label.RichText;
@@ -20,15 +26,13 @@ import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
-
+@Component
 public class ReceiptEntryView extends VerticalLayout implements View {
 	
 	private static final long serialVersionUID = 1L;
-
-	@Autowired
-	ReceiptService repo;
 
 	private MTable<Receipt> list = new MTable<>(Receipt.class)
 			.withProperties("id", "memberId", "wassiyatId", "memberName",
@@ -58,7 +62,7 @@ public class ReceiptEntryView extends VerticalLayout implements View {
 	static final int PAGESIZE = 45;
 
 	private void listEntities() {
-		Optional<List<Receipt>> receipts = Optional.ofNullable(repo.listReceipts());
+		Optional<List<Receipt>> receipts = Optional.ofNullable(getReceiptService().listReceipts());
 		receipts.ifPresent(list::setBeans); //list.setBeans(repo.listReceipts()); 
 		adjustActionButtonState();
 
@@ -80,7 +84,7 @@ public class ReceiptEntryView extends VerticalLayout implements View {
 	}
 
 	public void saveEntry(Receipt entry) {
-		repo.addReceipt(entry);
+		getReceiptService().addReceipt(entry);
 		listEntities();
 		closeWindow();
 	}
@@ -93,6 +97,11 @@ public class ReceiptEntryView extends VerticalLayout implements View {
 	protected void closeWindow() {
 		
 		getUI().getWindows().stream().forEach(w -> getUI().removeWindow(w));
+	}
+	
+	private ReceiptService getReceiptService(){
+		MyVaadinUI ui = (MyVaadinUI) UI.getCurrent();
+		return ui.getReceiptService();
 	}
 
 }

@@ -4,6 +4,7 @@ import org.ahmadiyya.halqa.software.ui.form.LoginForm;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.VerticalLayout;
 
 public class LoginView extends VerticalLayout implements View {
@@ -12,7 +13,10 @@ public class LoginView extends VerticalLayout implements View {
 
 	public LoginView() {
 		LoginForm loginForm = new LoginForm();
+		loginForm.setWidth("100%");
+		
 		addComponent(loginForm);
+		
 	}
 
 	@Override
